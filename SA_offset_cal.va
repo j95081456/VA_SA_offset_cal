@@ -1,0 +1,24 @@
+// verilogA for SA offset calibration //
+module offset_cal (sa_out, clk, vrefp, vrefn);
+    input  sa_out, clk;
+    output vrefp , vrefn;
+    electrical sa_out, clk, vrefp, vrefn;
+    parameter real VDD  = 1.2;
+    parameter real thr  = VDD/2;
+    parameter real vcom = 0.8;
+    real dv = 0;
+    analog begin
+    
+    V(vrefp) <+ vcom + dv;
+    V(vrefn) <+ vcom - dv;
+    @(cross(V(clk) > thr)) begin
+        if (V(sa_out) > thr)
+            dv = dv - 0.001;
+        else
+            dv = dv + 0.001;
+    end
+    end
+endmodule
+ .hdl '/home/memory/project/9l76/9l76a34/hspice/SA_cal/offset_cal.va'
+ xofs_cal sa_out clk vrefp vrefn offset_cal
+.tr 0.1p 50n sweep monte=1024
