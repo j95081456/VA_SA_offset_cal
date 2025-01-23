@@ -19,6 +19,6 @@ module offset_cal (sa_out, clk, vrefp, vrefn);
     end
     end
 endmodule
- .hdl '/home/memory/project/9l76/9l76a34/hspice/SA_cal/offset_cal.va'
+ .hdl 'xxx/xxx/hspice/SA_cal/offset_cal.va'
  xofs_cal sa_out clk vrefp vrefn offset_cal
 .tr 0.1p 50n sweep monte=1024
