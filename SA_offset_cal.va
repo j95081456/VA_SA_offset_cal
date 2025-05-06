@@ -11,7 +11,7 @@ module offset_cal (sa_out, clk, vrefp, vrefn);
     
     V(vrefp) <+ vcom + dv;
     V(vrefn) <+ vcom - dv;
-    @(cross(V(clk) > thr)) begin
+    @(cross(V(clk) > thr)) begin // @(cross(V(clk) - thr, +1)) is better //
         if (V(sa_out) > thr)
             dv = dv - 0.001;
         else
